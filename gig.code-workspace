@@ -7,5 +7,7 @@
 			"path": "../../alamesa"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"editor.tabSize": 2
+	}
 }
