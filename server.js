@@ -9,5 +9,5 @@ connect();
 app.use(express.json());
 
 app.listen(port, () => {
-    console.log(`App running on http://localhost:${port}`);
+  console.log(`App running on http://localhost:${port}`);
 });
