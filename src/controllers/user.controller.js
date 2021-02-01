@@ -64,7 +64,6 @@ module.exports = {
   },
 
   async show(req, res) {
-    console.log(User.findById(req.user))
     try {
       const user = await User.findById(req.user);
 
