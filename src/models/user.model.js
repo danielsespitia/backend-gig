@@ -34,7 +34,7 @@ const userSchema = new Schema({
   videoStart: {
     type: Number,
   },
-  VideoEnd: {
+  videoEnd: {
     type: Number,
   },
   description: {
