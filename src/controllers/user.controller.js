@@ -68,7 +68,7 @@ module.exports = {
       const user = await User.findById(req.user);
 
       if (!user) {
-        throw new Error("Client not found");
+        throw new Error("User not found");
       }
 
       res.status(200).json({ message: "User found", data: user });
@@ -85,7 +85,7 @@ module.exports = {
       });
 
       if (!user) {
-        throw new Error("Could not update that client");
+        throw new Error("Could not update that user");
       }
 
       res.status(200).json({ message: "User updated", data: user });
