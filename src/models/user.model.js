@@ -31,10 +31,16 @@ const userSchema = new Schema({
   video: {
     type: String,
   },
-  videoStart: {
+  videoStartMin: {
     type: Number,
   },
-  videoEnd: {
+  videoStartSec: {
+    type: Number,
+  },
+  videoEndMin: {
+    type: Number,
+  },
+  videoEndSec: {
     type: Number,
   },
   description: {
@@ -43,8 +49,11 @@ const userSchema = new Schema({
   city: {
     type: String,
   },
-  instruments: {
-    type: [{ type: Schema.Types.ObjectId, ref: "Instrument" }],
+  mainInstrument: {
+    type: String,
+  },
+  sideInstrument: {
+    type: String,
   },
   youtubeAccount: {
     type: String,
@@ -58,11 +67,14 @@ const userSchema = new Schema({
   instagramAccount: {
     type: String,
   },
-  genres: {
-    type: [{ type: Schema.Types.ObjectId, ref: "Genre" }],
+  mainGenre: {
+    type: String,
+  },
+  sideGenre: {
+    type: String,
   },
   influences: {
-    type: [{ type: Schema.Types.ObjectId, ref: "Influence" }],
+    type: String,
   },
   isProfessional: {
     type: Boolean,
