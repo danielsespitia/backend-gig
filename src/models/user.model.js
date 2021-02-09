@@ -28,6 +28,9 @@ const userSchema = new Schema({
     type: Boolean,
     required: true,
   },
+  profilePicture: {
+    type: String,
+  },
   video: {
     type: String,
   },

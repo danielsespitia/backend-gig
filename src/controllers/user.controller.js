@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 module.exports = {
-  
   async signup(req, res) {
     try {
       const { name, email, password, terms } = req.body;
@@ -91,6 +90,27 @@ module.exports = {
       res.status(200).json({ message: "User updated", data: user });
     } catch (error) {
       res.status(400).json({ message: "User could not be updated" });
+    }
+  },
+
+  async updateProfilePicture(req, res) {
+    try {
+      const {
+        file: { secure_url },
+      } = req.body;
+      const user = await User.findByIdAndUpdate(
+        req.user,
+        { profilePicture: secure_url },
+        { new: true, useFindAndModify: false }
+      );
+
+      if (!user) {
+        throw new Error("Could not upload that Profile Picture");
+      }
+
+      res.status(200).json({ message: "Profile picture updated", data: user });
+    } catch (error) {
+      res.status(400).json({ message: "Profile picture could not be updated" });
     }
   },
 
