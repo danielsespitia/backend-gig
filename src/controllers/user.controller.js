@@ -1,6 +1,8 @@
 const User = require("../models/user.model");
+const Message = require("../models/message.model");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const mongoose = require("mongoose");
 
 module.exports = {
   async signup(req, res) {
@@ -125,5 +127,13 @@ module.exports = {
     } catch (err) {
       res.status(400).json({ message: "User could not be deleted" });
     }
+  },
+
+  async showReceivedMessages(req, res) {
+    const messages = await Message.find({
+      reader: mongoose.Types.ObjectId(req.user),
+    }).populate("sender", "_id name profilePicture");
+
+    res.status(200).json({ message: "Messages found", data: messages });
   },
 };
