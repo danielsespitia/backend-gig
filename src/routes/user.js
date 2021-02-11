@@ -12,5 +12,6 @@ router
   .route("/update-pp")
   .put(auth, userProfilePicture, userController.updateProfilePicture);
 router.route("/").delete(auth, userController.destroy);
+router.route("/messages").get(auth, userController.showReceivedMessages);
 
 module.exports = router;

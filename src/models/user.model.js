@@ -40,12 +40,6 @@ const userSchema = new Schema({
   videoStartSec: {
     type: Number,
   },
-  videoEndMin: {
-    type: Number,
-  },
-  videoEndSec: {
-    type: Number,
-  },
   description: {
     type: String,
   },
@@ -94,6 +88,10 @@ const userSchema = new Schema({
   premiumAccount: {
     type: Boolean,
   },
+  messages: {
+    type: [{ type: Schema.Types.ObjectId, ref: 'Message' }]
+  },
+},{
 });
 
 const User = model("User", userSchema);

@@ -3,15 +3,16 @@ const jwt = require("jsonwebtoken");
 exports.auth = (req, res, next) => {
   try {
     const { authorization } = req.headers;
-    
+
     if (!authorization) {
-      throw new Error("Su sesion expiró");
+      res.status(401).json({ message: "No esta autorizado" });
+      return;
     }
 
     const [_, token] = authorization.split(" ");
-
     if (!token) {
-      throw new Error("Su sesion expiró");
+      res.status(401).json({ message: "No esta autorizado" });
+      return;
     }
 
     const { id } = jwt.verify(token, process.env.SECRET);
