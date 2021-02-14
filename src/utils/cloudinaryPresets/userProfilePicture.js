@@ -1,5 +1,5 @@
-const Busboy = require("busboy");
-const cloudinary = require("cloudinary").v2;
+const Busboy = require('busboy');
+const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -22,35 +22,35 @@ userProfilePicture = (req, res, next) => {
 
   req.body = {};
 
-  busboy.on("field", (key, val) => {
+  busboy.on('field', (key, val) => {
     req.body[key] = val;
   });
 
-  busboy.on("file", (key, file) => {
+  busboy.on('file', (key, file) => {
     uploadingFile = true;
     uploadingCount++;
 
     const stream = cloudinary.uploader.upload_stream(
-      { upload_preset: "User_ProfilePicture" },
+      { upload_preset: 'User_ProfilePicture' },
       (err, res) => {
-        if (err) throw new Error("Something went wrong! try again");
+        if (err) throw new Error('Something went wrong! try again');
         req.body[key] = res;
         uploadingFile = false;
         uploadingCount--;
         done();
       }
     );
-    
-    file.on("data", (data) => {
+
+    file.on('data', (data) => {
       stream.write(data);
     });
 
-    file.on("end", () => {
+    file.on('end', () => {
       stream.end();
     });
   });
 
-  busboy.on("finish", () => {
+  busboy.on('finish', () => {
     done();
   });
 
