@@ -1,8 +1,8 @@
-const User = require("../models/user.model");
-const Message = require("../models/message.model");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
-const mongoose = require("mongoose");
+const User = require('../models/user.model');
+const Message = require('../models/message.model');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const mongoose = require('mongoose');
 
 module.exports = {
   async signup(req, res) {
@@ -31,13 +31,13 @@ module.exports = {
       const { email, password } = req.body;
       const user = await User.findOne({ email });
       if (!user) {
-        throw new Error("Usuario o contraseña invalida");
+        throw new Error('Usuario o contraseña invalida');
       }
 
       const isValid = await bcrypt.compare(password, user.password);
 
       if (!isValid) {
-        throw new Error("Usuario o contraseña invalida");
+        throw new Error('Usuario o contraseña invalida');
       }
 
       const token = jwt.sign({ id: user._id }, process.env.SECRET, {
@@ -55,12 +55,12 @@ module.exports = {
       const users = await User.find();
 
       if (!users) {
-        throw new Error("User list not found");
+        throw new Error('User list not found');
       }
 
-      res.status(200).json({ message: "Users list found", data: users });
+      res.status(200).json({ message: 'Users list found', data: users });
     } catch (error) {
-      res.status(404).json({ message: "User not found" });
+      res.status(404).json({ message: 'User not found' });
     }
   },
 
@@ -69,12 +69,12 @@ module.exports = {
       const user = await User.findById(req.user);
 
       if (!user) {
-        throw new Error("User not found");
+        throw new Error('User not found');
       }
 
-      res.status(200).json({ message: "User found", data: user });
+      res.status(200).json({ message: 'User found', data: user });
     } catch (error) {
-      res.status(404).json({ message: "User not found" });
+      res.status(404).json({ message: 'User not found' });
     }
   },
 
@@ -86,12 +86,12 @@ module.exports = {
       });
 
       if (!user) {
-        throw new Error("Could not update that user");
+        throw new Error('Could not update that user');
       }
 
-      res.status(200).json({ message: "User updated", data: user });
+      res.status(200).json({ message: 'User updated', data: user });
     } catch (error) {
-      res.status(400).json({ message: "User could not be updated" });
+      res.status(400).json({ message: 'User could not be updated' });
     }
   },
 
@@ -107,12 +107,12 @@ module.exports = {
       );
 
       if (!user) {
-        throw new Error("Could not upload that Profile Picture");
+        throw new Error('Could not upload that Profile Picture');
       }
 
-      res.status(200).json({ message: "Profile picture updated", data: user });
+      res.status(200).json({ message: 'Profile picture updated', data: user });
     } catch (error) {
-      res.status(400).json({ message: "Profile picture could not be updated" });
+      res.status(400).json({ message: 'Profile picture could not be updated' });
     }
   },
 
@@ -121,19 +121,19 @@ module.exports = {
       const user = await User.findByIdAndDelete(req.user);
 
       if (!user) {
-        throw new Error("Could not delete user");
+        throw new Error('Could not delete user');
       }
-      res.status(200).json({ message: "User deleted", data: user });
+      res.status(200).json({ message: 'User deleted', data: user });
     } catch (err) {
-      res.status(400).json({ message: "User could not be deleted" });
+      res.status(400).json({ message: 'User could not be deleted' });
     }
   },
 
   async showReceivedMessages(req, res) {
     const messages = await Message.find({
       reader: mongoose.Types.ObjectId(req.user),
-    }).populate("sender", "_id name profilePicture");
+    }).populate('sender', '_id name profilePicture');
 
-    res.status(200).json({ message: "Messages found", data: messages });
+    res.status(200).json({ message: 'Messages found', data: messages });
   },
 };

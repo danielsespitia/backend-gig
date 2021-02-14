@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 function connect() {
-  const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/gig'
+  const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/gig';
   const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -18,4 +18,4 @@ function connect() {
   return mongoose.connection;
 }
 
-module.exports = { connect }
+module.exports = { connect };

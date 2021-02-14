@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model } = require('mongoose');
 
 const messageSchema = new Schema(
   {
@@ -8,12 +8,12 @@ const messageSchema = new Schema(
     },
     sender: {
       type: Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
       required: true,
     },
     reader: {
       type: Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
       required: true,
     },
   },
@@ -22,6 +22,6 @@ const messageSchema = new Schema(
   }
 );
 
-const Message = model("Message", messageSchema);
+const Message = model('Message', messageSchema);
 
 module.exports = Message;
